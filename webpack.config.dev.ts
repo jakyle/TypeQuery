@@ -1,4 +1,6 @@
+ // tslint:disable:object-literal-sort-keys
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
@@ -45,7 +47,17 @@ export default {
               },
               {
                 test: /\.scss$/,
-                loader: 'style-loader!css-loader!sass-loader',
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true,
+                                minimize: true,
+                            },
+                        },
+                    ],
+                }),
               },
               {
                 test: /\.pug$/,
@@ -54,6 +66,14 @@ export default {
         ],
       },
       plugins: [
+        new ExtractTextPlugin('index.css'),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            // tslint:disable-next-line:object-literal-sort-keys
+            Popper: ['popper.js', 'default'],
+            Tether: 'tether',
+        }),
         // Create HTML file that includes reference to bundled JS.
         new HtmlWebpackPlugin({
             template: 'src/index.pug',

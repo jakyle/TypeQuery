@@ -78,6 +78,10 @@ export default {
 
       },
       plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+        }),
         // Minify js
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,

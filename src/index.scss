@@ -1,9 +1,13 @@
+
 $mainColor: #7777bb;
+$headerColor: #e41616;
 
 body {
     font-family: sans-serif;
     background: $mainColor;
     padding: 5px;
-    
 }
-   
+.header{
+    background-color: $headerColor;
+    color: white;
+}

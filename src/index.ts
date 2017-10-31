@@ -1,38 +1,24 @@
-import {deleteUser, getUsers} from './api/userApi';
+import Game from './classes/Game';
+import Player from './classes/Player';
+import Utility from './classes/Utility';
 import './index.scss';
+import {IPerson} from './interfaces/person';
+import {test2} from './test';
 const globalAny: any = global;
 
-// Populate table of users via API call.
-getUsers().then((result: any) => {
-    let usersBody: string = '';
+let newGame: Game;
 
-    result.forEach((user: any) => {
-        usersBody += `<tr>
-        <td><a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
-        <td>${user.id}</td>
-        <td>${user.firstName}</td>
-        <td>${user.lastName}</td>
-        <td>${user.email}</td>
-        </tr>`;
-    });
+// add click handler to the start game button
+$('#startGame')!.on('click', () => {
+    const player: Player = new Player();
+    player.name = Utility.getInputValue('#playername');
 
-    globalAny.document.getElementById('users').innerHTML = usersBody;
+    const problemCount: number = Number(Utility.getInputValue('#problemCount'));
+    const factor: number = Number(Utility.getInputValue('#factor'));
 
-    const deleteLinks = globalAny.document.getElementsByClassName('deleteUser');
-
-    // Must use array.from to create a real array from a DOM collection
-    // getElementByClassname only returns an "array Like" object
-    Array.from<any, any>(deleteLinks, (link) => {
-        link.onclick = (event: any) => {
-            const element = event.target;
-            event.preventDefault();
-            deleteUser(element.attributes['data-id'].value);
-            const row = element.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        };
-    });
+    newGame = new Game(player, problemCount, factor);
+    newGame.displayGame();
 });
 
-if (module.hot) {
-    module.hot.accept();
-  }
+// add click handler to the calculate score button
+$('#calculate')!.on('click', () => newGame.calculateScore());

@@ -1,17 +1,32 @@
-doctype html
-html(lang='en')
-  head
+html
+  head(lang='en')
     meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    title Document
+    title MultiMath
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css", integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ", crossorigin="anonymous")
   body
-    h1 Users
-    table
-      thead
-        th  
-        th Id
-        th First Name
-        th Last Name
-        th Email
-      tbody#users
+    nav.navbar.navbar-light.bg-light.header
+      .container-fluid
+        .navbar-header
+          span.navbar-brand MultiMath
+    #nameform.form-horizontal
+      .form-group
+        label.col-sm-2.control-label(for='playername') Player Name
+        .col-sm-2
+          input#playername.form-control(type='text', size='20', placeholder='Player Name')
+      .form-group
+        label.col-sm-2.control-label(for='factor') Factor
+        .col-sm-2
+          input#factor.form-control(type='text', size='20', value='5', placeholder='Factor')
+      .form-group
+        label.col-sm-2.control-label(for='problemCount') Number of Problems
+        .col-sm-2
+          input#problemCount.form-control(type='text', size='20', placeholder='Number of Problems')
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button#startGame.btn.btn-primary Start Game
+          button#calculate.btn.btn-success(disabled='') Calculate Score
+    #game.form-horizontal
+    #scores.col-sm-offset-2.col-sm-10
+      h2 Scoreboard
+      h4#postedScores No scores yet
+    #messages.col-sm-offset-2.col-sm-10

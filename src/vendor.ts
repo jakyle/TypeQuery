@@ -11,7 +11,6 @@
     should be less frequent. Any files that aren't referenced
     here will be bundled into main.js for the production build.
 */
-
 import 'bootstrap';
 import 'jquery';
 import 'popper.js';
