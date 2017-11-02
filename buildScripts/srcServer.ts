@@ -1,4 +1,5 @@
 /* tslint:disable:no-var-requires */
+import * as compression from 'compression';
 import * as express from 'express';
 import * as http from 'http';
 import * as path from 'path';
@@ -9,11 +10,11 @@ const port: number = 3000;
 const app: any = express();
 const compiler: any = webpack(config);
 
+app.use(compression());
 (() => {
 
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
-    quiet: true,
     publicPath: config.output.publicPath,
     stats: {colors: true},
 }));

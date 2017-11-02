@@ -20,6 +20,7 @@
         "./src/**/*.test.ts"
     ],
     "awesomeTypescriptLoaderOptions": {
-        "useBabel": true
+        "useBabel": true,
+        "useCache": true
     }
 }

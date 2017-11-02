@@ -1,3 +1,3 @@
-export default class Utility {
-    static getInputValue(elementID: string): any;
-}
+declare function getInputValue(elementID: string): any;
+declare function logger(message: string): void;
+export { getInputValue as getValue, logger };

@@ -12,19 +12,28 @@ export default {
         main: [
             dir,
             hot,
+            path.resolve(__dirname, 'src/index.scss'),
         ],
     },
     target: 'web',
     output: {
-        path: path.resolve(__dirname, 'src'),
+        path: path.resolve(__dirname, 'src', 'bundle'),
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: '[name].js',
+        devtoolModuleFilenameTemplate : '[absolute-resource-path]',
+        devtoolFallbackModuleFilenameTemplate : '[absolute-resource-path]?[hash]',
     },
+    devtool : 'inline-source-map',
     resolve: {
-        extensions: [ '.ts', '.tsx', '.js', '.scss', '.sass', '.css' , '.pug'],
+        extensions: [ '.ts', '.tsx', '.js', '.scss', '.sass', '.css' , '.pug', '.json'],
     },
     module: {
         rules: [
+            {
+                test: /\.(js|ts|tsx|jsx)$/,
+                use: ['source-map-loader'],
+                enforce: 'pre',
+            },
             {
                 enforce: 'pre',
                 test: /\.tsx?$/,
@@ -38,7 +47,7 @@ export default {
             {   test: /\.(ts|tsx)$/,
                 loader: 'awesome-typescript-loader',
                 exclude: /node_modules/,
-                options: { useBabel: true },
+                options: { useBabel: true, useCache: true },
             },
               {
                 test: /\.(js|jsx)$/,
@@ -66,7 +75,7 @@ export default {
         ],
       },
       plugins: [
-        new ExtractTextPlugin('index.css'),
+        new ExtractTextPlugin('[name].css'),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
