@@ -1,4 +1,3 @@
-import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import getBaseUrl from './baseUrl';
 
@@ -34,7 +33,7 @@ function onError(error: any) {
 }
 
 export function fetchMagazine() {
-    return fetch('http://localhost:3001/magazine').then((response) => response.json()).then((json) => {
+    return fetch('http://localhost:3001/db').then((response) => response.json()).then((json) => {
         return json;
     });
 }

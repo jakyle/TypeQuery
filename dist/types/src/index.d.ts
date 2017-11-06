@@ -4,4 +4,3 @@ export declare const test: {
     addNumbers: (num1: number, num2: number) => number;
 };
 export declare const favoriteLibrarian: Library.ILibrarian;
-export declare let magInv: any;

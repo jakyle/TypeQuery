@@ -1,5 +1,6 @@
 import {fetchMagazine} from './api/userApi';
 import {ReferenceItem} from './classes/ReferenceItem';
+import Shelf from './classes/Shelf';
 import {UniversityLibrarian} from './classes/UniversityLibrarian';
 import { Category } from './enums';
 import * as Library from './interfaces/interfaces';
@@ -141,13 +142,38 @@ export const test = {
 export const favoriteLibrarian: Library.ILibrarian = new UniversityLibrarian();
 
 fetchMagazine().then( (data) => {
-    magInvTrans(data);
+    data.book.forEach((book: any) => bookShelf.add(book));
 });
 
-const magInvTrans = (data: any): void => magInv = data;
+const bookShelf: Shelf < Library.IBook > = new Shelf < Library.IBook > ();
 
-export let magInv: any;
-console.log(magInv);
+const firstBook: Library.IBook = bookShelf.getFirst();
+
+const magazines: Library.IMagazine[] = [
+    { title: 'Programming Language Montly',
+     publisher: 'Code Mags',
+    },
+    { title: 'Literary Fiction Quarterly',
+     publisher: 'College Press',
+    },
+    { title: 'Five Points',
+     publisher: 'GSU',
+    },
+];
+
+const magazineShelf: Shelf<Library.IMagazine> = new Shelf<Library.IMagazine>();
+
+magazines.forEach((mag) => magazineShelf.add(mag));
+
+const firstMagazine: Library.IMagazine = magazineShelf.getFirst();
+
+magazineShelf.printTitle();
+
+const softwareBook = bookShelf.find('Code Complete');
+console.log(`${softwareBook.title} (${softwareBook.author})`);
+
+/* const numberShelf: Shelf<number> = new Shelf<number>();
+[5, 10, 15].forEach((num) => numberShelf.add(num)); */
 
 /* const myBook: Book = {
     id: 5,

@@ -83,7 +83,6 @@ export default {
             Popper: ['popper.js', 'default'],
             Tether: 'tether',
             fetfh: 'whatwg-fetch',
-            isofh: 'isomorphic-fetch',
         }),
         // Create HTML file that includes reference to bundled JS.
         new HtmlWebpackPlugin({

@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+#awcache
+.awcache
+
+#gzip
+*.gzip
