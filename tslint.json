@@ -19,7 +19,11 @@
                 "timeEnd",
                 "trace"
             ]
-        }
+        },
+        "variable-name": [
+            true,
+            "allow-leading-underscore"
+        ]
     },
     "rulesDirectory": []
 }

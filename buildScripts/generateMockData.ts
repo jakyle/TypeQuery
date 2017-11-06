@@ -6,16 +6,28 @@
 import * as chalk from 'chalk';
 import * as fs from 'fs';
 import mocker from 'mocker-data-generator';
+import * as util from 'util';
+import * as jso from '../src/api/db.json';
+import {bookSchema, magSchema} from './mockDataLibrary';
 import {schema} from './mockDataSchema';
 
 const json = mocker()
-    .schema('users', schema, {min: 3, max: 5})
-    .build((data: any) => JSON.stringify(data));
+    .schema('magazine', magSchema, 5)
+    .schema('book', bookSchema, 4)
+    .build((err: Error, data: any) => {
+        if (err) {
+            throw err;
+        } else {
+            return JSON.stringify(data);
+        }
+    });
 
-fs.writeFile('./src/api/db.json', json, (err: any) => {
+fs.writeFile('./src/api/db.json', json, (err: Error) => {
     if (err) {
-        return console.log(chalk.red( err ));
+        return console.log( err );
     } else {
         console.log(chalk.green('Mock data generated.'));
     }
 });
+
+const word = (jso as any).magazine;

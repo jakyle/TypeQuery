@@ -2,7 +2,7 @@
     "compilerOptions": {
         "moduleResolution": "node",
         "target": "es6",
-        "lib": ["es2016", "dom", "es2015"],
+        "lib": ["es2016", "dom", "es2015", "es2017"],
         "noImplicitAny": true,
         "strictNullChecks": true,
         "sourceMap": true,

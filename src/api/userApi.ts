@@ -1,3 +1,4 @@
+import 'isomorphic-fetch';
 import 'whatwg-fetch';
 import getBaseUrl from './baseUrl';
 
@@ -30,4 +31,10 @@ function onSuccess(response: any) {
 function onError(error: any) {
     // tslint:disable-next-line:no-console
     console.log(error);
+}
+
+export function fetchMagazine() {
+    return fetch('http://localhost:3001/magazine').then((response) => response.json()).then((json) => {
+        return json;
+    });
 }

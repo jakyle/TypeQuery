@@ -1,7 +1,10 @@
+import {fetchMagazine} from './api/userApi';
+import {ReferenceItem} from './classes/ReferenceItem';
+import {UniversityLibrarian} from './classes/UniversityLibrarian';
 import { Category } from './enums';
-import { IBook } from './interfaces/interfaces';
+import * as Library from './interfaces/interfaces';
 
-function GetAllBooks() {
+function GetAllBooks(): Library.IBook[] {
     const books = [
         {
             id: 1,
@@ -63,7 +66,7 @@ function LogBookTitles(titles: string[]): void {
     }
 }
 
-function GetBookByID(id: number) {
+function GetBookByID(id: number): Library.IBook {
     const allBooks = GetAllBooks();
     return allBooks.filter((book) => book.id === id)[0];
 }
@@ -124,31 +127,43 @@ function GetTitles(bookProperty: any): string[] {
 
     return foundTitles;
 }
+
+function printBook(book: Library.IBook): void {
+    console.log(`${book.title} by ${book.author}`);
+}
 // **********************************************************
 
-const hermansBooks = GetTitles(false);
-hermansBooks.forEach((title) => console.log(title));
+export const test = {
+    sayHello: () =>  'hello',
+    addNumbers: (num1: number, num2: number) => num1 + num2,
+};
 
-/* const myBooks : string[] = CheckoutBooks('Thorne', 1, 3, 4);
-myBooks.forEach((title) => console.log(title));
+export const favoriteLibrarian: Library.ILibrarian = new UniversityLibrarian();
+
+fetchMagazine().then( (data) => {
+    magInvTrans(data);
+});
+
+const magInvTrans = (data: any): void => magInv = data;
+
+export let magInv: any;
+console.log(magInv);
+
+/* const myBook: Book = {
+    id: 5,
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    available: true,
+    category: Category.Fiction,
+    pages: 250,
+    markDamaged : (reason: string) => console.log('Damaged: ' + reason),
+};
+
+/* printBook(myBook);
+myBook.markDamaged!('torn pages');
  */
-// LogFirstAvailable();
-
-/* let fictionBooks = GetBookTitlesByCategory();
-fictionBooks.forEach((title) => console.log(title)); */
-
-            /* CreateCustomer('Michelle');
-CreateCustomer('Leigh', 6);
-CreateCustomer('Marie', 12, 'Atlanta'); */
-
-            /* let x: number;
-
-let idGenerator: (chars: string, nums: number) => string;
-idGenerator = (name: string, id: number) =>  id + name;
-
-let myID: string = idGenerator('daniel', 20);
-console.log(myID);
- */
-            /* const fictionBooks = GetBookTitlesByCategory(Category.Fiction);
-fictionBooks.forEach((val: string, idx: number, arr: string[]) => console.log(++idx + ' - ' + val));
+/*
+let logDamage: DamageLogger;
+logDamage = (damage: string) => console.log('Damage reported: ' + damage);
+logDamage('coffee stains');
  */
