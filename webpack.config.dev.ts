@@ -3,6 +3,9 @@ import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
+// tslint:disable-next-line:variable-name
+// tslint:disable-next-line:no-var-requires
+const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
 import * as webpack from 'webpack';
 const dir = path.resolve(__dirname, 'src/index');
 const hot = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000';
@@ -91,5 +94,9 @@ export default {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new uglifyJSPlugin({
+            cache: true,
+            parallel: 4,
+        }),
     ],
 };
